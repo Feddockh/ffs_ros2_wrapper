@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<robot name="ffs_camera" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <material name="dark_grey">
+    <color rgba="0.3 0.3 0.3 1"/>
+  </material>
+
+  <!-- Stereo camera case -->
+  <link name="firefly_flash_stereo_case">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://ffs_description/meshes/Firefly_Flash_Stereo_Case.stl" scale="1 1 1"/>
+      </geometry>
+      <material name="dark_grey"/>
+    </visual>
+  </link>
+
+  <!-- Left camera -->
+  <link name="firefly_left_camera">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://ffs_description/meshes/Firefly_Camera.stl"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <link name="firefly_left_lens">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://ffs_description/meshes/Firefly_Lens.stl"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <link name="firefly_left_optical"/>
+
+  <!-- Right camera -->
+  <link name="firefly_right_camera">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://ffs_description/meshes/Firefly_Camera.stl"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <link name="firefly_right_lens">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://ffs_description/meshes/Firefly_Lens.stl"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <link name="firefly_right_optical"/>
+
+  <!-- Mount to cameras -->
+  <joint name="case_to_left" type="fixed">
+    <parent link="firefly_flash_stereo_case"/>
+    <child link="firefly_left_camera"/>
+    <origin xyz="-0.03 -0.012 0.019" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="case_to_right" type="fixed">
+    <parent link="firefly_flash_stereo_case"/>
+    <child link="firefly_right_camera"/>
+    <origin xyz="0.03 -0.012 0.019" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Camera to lens joints -->
+  <joint name="left_to_lens" type="fixed">
+    <parent link="firefly_left_camera"/>
+    <child link="firefly_left_lens"/>
+    <origin xyz="0 0.008 0" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="right_to_lens" type="fixed">
+    <parent link="firefly_right_camera"/>
+    <child link="firefly_right_lens"/>
+    <origin xyz="0 0.008 0" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Lens to optical -->
+  <joint name="left_to_optical" type="fixed">
+    <parent link="firefly_left_lens"/>
+    <child link="firefly_left_optical"/>
+    <origin xyz="0 0.044 0" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="right_to_optical" type="fixed">
+    <parent link="firefly_right_lens"/>
+    <child link="firefly_right_optical"/>
+    <origin xyz="0 0.044 0" rpy="0 0 0"/>
+  </joint>
+
+</robot>
