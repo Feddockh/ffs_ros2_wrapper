@@ -1,14 +1,15 @@
 from launch import LaunchDescription
 from launch_ros.actions import Node
 from launch.actions import DeclareLaunchArgument
-from launch.substitutions import LaunchConfiguration, Command, PathJoinSubstitution
+from launch.substitutions import LaunchConfiguration, Command
 from ament_index_python.packages import get_package_share_directory
+from launch_ros.parameter_descriptions import ParameterValue
 import os
 
 
 def generate_launch_description():
     description_pkg = get_package_share_directory('ffs_description')
-    urdf_file = os.path.join(description_pkg, 'urdf', 'ffs_camera.urdf.xacro')
+    urdf_file = os.path.join(description_pkg, 'urdf', 'ffs_description.urdf.xacro')
 
     return LaunchDescription([
         DeclareLaunchArgument('use_sim_time', default_value='false'),
@@ -19,7 +20,10 @@ def generate_launch_description():
             output='screen',
             parameters=[{
                 'use_sim_time': LaunchConfiguration('use_sim_time'),
-                'robot_description': Command(['xacro ', urdf_file])
+                'robot_description': ParameterValue(
+                    Command(['xacro ', urdf_file]),
+                    value_type=str
+                )
             }]
         ),
         Node(

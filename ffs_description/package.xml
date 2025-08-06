@@ -3,8 +3,8 @@
 <package format="3">
   <name>ffs_description</name>
   <version>0.0.1</version>
-  <description>Contains firefly flash stereo camera model description.</description>
-  <maintainer email="hayden4feddock@gmail.com">hayden</maintainer>
+  <description>ROS2 description for Firefly flash stereo camera.</description>
+  <maintainer email="hayden4feddock@gmail.com">Hayden Feddock</maintainer>
   <license>MIT</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>

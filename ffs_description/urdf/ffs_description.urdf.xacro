@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<robot name="ffs_camera" xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <!-- Include macro files -->
+    <xacro:include filename="$(find ffs_description)/urdf/ffs_macro.urdf.xacro" />
+
+    <xacro:ffs_camera/>
+
+</robot>
